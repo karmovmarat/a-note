@@ -1,0 +1,148 @@
+{
+  "name": "A-Note started-with-webpack-3.10.0",
+  "version": "0.0.5",
+  "private": true,
+  "description": "The main site for all things A-Note.01.01.2018",
+  "homepage": "https://github.com/A-Note",
+  "author": "Karmov Marat",
+  "license": "MIT",
+  "main": "n/a",
+  "keywords": [
+    "Note",
+    "build",
+    "tool"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/A-Note"
+  },
+  "bugs": {
+    "url": "https://github.com/A-Note/issues"
+  },
+  "engines": {
+    "node": ">=6.9"
+  },
+  "scripts": {
+
+"build-s": "webpack --progress",
+"start-s": "webpack --watch",
+ "start:dev": "webpack-dev-server",
+"build-2": "webpack --config webpack-production.config.js",
+"start-2": "webpack-dev-server --config webpack-dev-server.config.js",
+
+  "start-3": "webpack-dev-server --env development",
+  "build-3": "webpack --env production",
+
+ "clean": "rimraf ./dist",
+
+    "start": "npm run init:generated && npm run fetch && node ./antwar.bootstrap.js develop",
+    "start-only": "node ./antwar.bootstrap.js develop",
+    "build": "npm run init:generated && npm run fetch && rm -rf build/ && node ./antwar.bootstrap.js build && npm run sitemap && echo webpack.js.org > build/CNAME",
+    "build-test": "npm run build && http-server build/",
+    "deploy": "gh-pages -d build",
+    "fetch": "sh src/scripts/fetch.sh",
+    "init:generated": "mkdirp ./generated/loaders && mkdirp ./generated/plugins ",
+    "lint": "run-s lint:*",
+    "lint:js": "eslint . --ext .js --ext .jsx",
+    "lint:markdown": "markdownlint --config ./.markdownlint.json *.md ./src/content/**/*.md",
+    "lint:social": "alex . -q",
+    "lint:prose": "cp .proselintrc ~/ && proselint src/content",
+    "test": "npm run lint",
+    "sitemap": "cd build && sitemap-static --prefix=https://webpack.js.org/ > sitemap.xml"
+  },
+  "devDependencies": {
+      "webpack": "^3.10.0",
+      "webpack-dev-server": "^2.9.7",
+      "moment": "^2.20.1",
+      "extract-text-webpack-plugin": "^3.0.0",
+     "uglifyjs-webpack-plugin": " 1.1.6",
+     "uglify-es": "^3.3.4",
+      "copy-webpack-plugin": "^4.3.0",
+      "autoprefixer": "^7.2.3",
+      "webpack-merge": "^4.1.0", 
+
+/*если надо что-нибудь удалить*/
+        "rimraf": "^2.6.1",
+
+      "babel-core": "^6.26.0",
+      "babel-loader": "^7.1.2",
+      "babel-preset-env": "1.6.0",
+      "babel-preset-react": "6.24.1",
+      "babel-preset-stage-0": "6.24.1",
+      "babel-eslint": "^7.2.3",
+    "babel-jest": "21.2.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+      "style-loader": "^0.18.2",
+      "css-loader": "0.28.7",
+      "sass-loader": "^6.0.6",
+      "postcss-loader": "^2.0.6",
+    "node-sass": "^4.5.3",
+    "npm-run-all": "^4.1.1",
+
+    "eslint": "4.7.2",
+    "eslint-loader": "^1.9.0",
+    "eslint-plugin-markdown": "^1.0.0-beta.7",
+    "eslint-plugin-react": "7.4.0",
+    "optimize-css-assets-webpack-plugin": "3.2.0",
+    "html-webpack-plugin": "^2.30.1",
+
+
+    "sitemap-static": "^0.4.2",
+    "duplexer": "^0.1.1",
+    "alex": "^4.1.0",
+    "antwar": "^0.19.0",
+    "antwar-helpers": "^0.19.0",
+    "antwar-interactive": "^0.19.0",
+    "async": "^2.5.0",
+
+    "file-loader": "^0.11.2",
+    "fontgen-loader": "^0.2.1",
+    "front-matter": "^2.2.0",
+    "gh-pages": "^1.0.0",
+    "github": "^10.0.0",
+
+    "http-server": "^0.10.0",
+    "hyperlink": "^3.0.1",
+    "loader-utils": "^1.1.0",
+    "lodash": "^4.17.4",
+    "markdown-loader": "^2.0.1",
+    "markdownlint": "^0.6.0",
+    "markdownlint-cli": "^0.3.1",
+    "marked": "^0.3.7",
+    "mkdirp": "^0.5.1",
+    "modularscale-sass": "^3.0.3",
+
+    "ncp": "^2.0.0",
+
+
+    "prism-languages": "^0.3.3",
+    "prismjs": "^1.9.0",
+    "raw-loader": "^0.5.1",
+    "request": "^2.81.0",
+ 
+    "tap-min": "^1.2.1",
+    "tap-parser": "^6.0.1",
+    "through2": "^2.0.3",
+    "url-loader": "^0.5.9",
+
+
+    "yaml-frontmatter-loader": "^0.1.0"
+  },
+  "dependencies": {
+       "react": "^15.6.1",
+       "react-dom": "^15.6.1",
+    "prop-types": "^15.5.10",
+    "react-router": "^4.2.0",
+    "react-router-dom": "^4.2.2",
+
+
+    "ajv": "^5.5.2",
+    "preact": "^8.2.7",
+    "preact-compat": "3.17.0",
+
+    "tool-list": "^0.11.0",
+    "webpack.vote": "^0.1.2",
+    "whatwg-fetch": "^2.0.3"
+  }
+}

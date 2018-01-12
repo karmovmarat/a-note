@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Тег input, атрибут multiple</title>
+    
+</head>
+
+<body>
+    <div name="" id="" className="">
+        <form name="" id="" className="">
+            <p> //добавляем элемент input type="file" на страницу </p>
+            <input type="file" name="" id="" accept="application/json" className="" style="display: _none;" title="Выберите файл для загрузки"> </input>
+            <p>//добавим кнопку reset и ее лэйбл</p>
+            <label name="" id="" for="" className=""> "очистить файл . " </label>
+            <input type="reset" name="" id="" className="" value="CLEAR"> </input>
+        </form>
+        <p> ******************** </p>
+        <input type="file" id="fileElem" multiple accept="image/*" style="display:none" onchange="handleFiles(this.files)">
+        <a href="#" id="fileSelect">Select some files</a>
+    </div>
+
+<script type="text/javascript">
+    var fileSelect = document.getElementById("fileSelect"),
+        fileElem = document.getElementById("fileElem");
+
+        fileSelect.addEventListener("click", function(e) {
+          if (fileElem) {
+            fileElem.click();
+          }
+        e.preventDefault(); // prevent navigation to "#"
+        }, false);
+    </script>
+    
+</body>
+
+</html>

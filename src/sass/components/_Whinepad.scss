@@ -1,0 +1,55 @@
+.Whinepad .WhinepadToolbar {
+  margin: 20px; /* 40px */
+}
+
+.Whinepad .WhinepadToolbarAdd {
+  float: left;
+}
+
+.Whinepad .WhinepadToolbarExport {
+  float: left;
+}
+
+.Whinepad .WhinepadToolbarSearch {
+  float: right;
+}
+
+.Whinepad .WhinepadToolbarAddButton {
+  font-size: 16px;  
+}
+            
+.Whinepad .WhinepadToolbarExportButton {
+  font-size: 16px; /* 22px */
+}
+
+.Whinepad .WhinepadToolbarExport a { /* thanks css3buttongenerator.com! */
+  background: #3498db;
+  background-image: linear-gradient(to bottom, #3498db, #2980b9);
+  border-radius: 8px; /* 28px */
+  box-shadow: 0px 1px 3px #666666;
+  color: #ffffff;
+  font-size: 14px;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+  border: 5px;
+  margin-right: 5px;
+/* added */
+  width: 48px;
+  height: 48px;
+}
+
+.Whinepad .WhinepadToolbarExport a:hover {
+  background: #3cb0fd;
+  background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+  text-decoration: none;
+}
+
+.Whinepad .WhinepadDatagrid {
+  clear: both;
+  margin: 40px;
+  padding-top: 20px;
+}
+
+
+
+
