@@ -29,7 +29,7 @@ class NavPan extends Component {
             <
             Navbar.Brand >
             <
-            a href = "#" > БЛОКНОТ-BS3 < /a> <
+            a href = "#" > БЛОКНОТ-BS3-28 < /a> <
             /Navbar.Brand> <
             Navbar.Toggle / >
             <

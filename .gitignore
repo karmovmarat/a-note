@@ -5,6 +5,9 @@ node_modules
 bower_components
 npm-debug.log
 site
+build/ #игнорируем все файлы в папке- build
+рабочий_build/  #игнорируем все файлы в папке- рабочий_build
+public/    #игнорируем все файлы в папке- public
 
 # игнорируем Архивы, дистрибутивы
 *.7z

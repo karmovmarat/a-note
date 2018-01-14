@@ -1,6 +1,6 @@
 "use strict";
 
-import '../sass/bundle_styles.scss';
+import '../sass/styles.scss';
 import Logo from './components/Logo';
 import Footer from './components/Footer';
 import React from 'react';
@@ -21,13 +21,13 @@ if (!data) {
 ReactDOM.render(
   <div >
     <div className="app-header">
-       <Logo/> 300 БЛОКНОТ !
+       <Logo/> 7257 БЛОКНОТ !
     </div>
     <NavPan/>
    
     <Whinepad initialSchema={schema} initialData={data} />
     <div className="app-footer">
-      <Footer/> Подвал ! !   04 November -23 decem 2017 year
+      <Footer/> Подвал ! !   04 November -23 decem 2017 year +14jan 2018
     </div>
   </div>,
   document.getElementById('pad')

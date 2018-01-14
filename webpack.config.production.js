@@ -1,3 +1,4 @@
+const webpack = require("webpack");
 const path = require('path');
  // для продакшн: const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
@@ -12,25 +13,26 @@ module.exports = {
 context: __dirname, //path.resolve(__dirname, './src/js'),
   entry: {
        app: './src/js/app.js', // string | object | array
-    vendor: [
+     vendor: [
         'react',
         'react-dom',
-        'react-router'
+        'react-bootstrap'
         //...
-    ]
+     ]
   },
   // Here the application starts executing
   // and webpack starts bundling
 
   output: {
     // options related to how webpack emits results
-    path: path.resolve(__dirname, './build'), // string  '/build' -?
+    path: path.resolve(__dirname, 'build'), // string  '/build' -?
     // the target directory for all output files
     // must be an absolute path (use the Node.js path module)
     filename: '[name].bandle.js', // for multiple entry points e.x. 'app.bandle.js'
     // the filename template for entry chunks
   // для продакшн:  sourceMapFilename: '[name].bandle.map', // string
-    publicPath: 'public' // string     publicPath: "https://cdn.example.com/", 
+    publicPath: './' // string это путь для формирования <script src="./zzapp.bandle.js"> </script>
+    //    publicPath: "https://cdn.example.com/", 
     // the url to the output directory resolved relative to the HTML page
    // library: "MyLibrary", // string,
     // the name of the exported library
@@ -59,22 +61,51 @@ context: __dirname, //path.resolve(__dirname, './src/js'),
         // options for the loader
       },
       {
-            test: /\.css$/,
-            use: ['style-loader','css-loader', {
-                loader: 'postcss-loader',
-                options: {
-                    plugins: () => [require('autoprefixer')]
-                }}]
+        test: /\.(png|jpg|gif|svg)$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: { 
+              name: '[name].[ext]',
+             // publicPath: './images/',
+              outputPath: 'images/' //этот путь добавится к имени файла, а затем к пути output: { publicPath
+              // будет так  ./images/[name].[ext]
+            }  
+          }
+        ]
       },
       {
-            test: /\.scss$/,
-            use: ExtractTextPlugin.extract( {
-            use: ['style-loader','css-loader', {
-                loader: 'postcss-loader',
-                options: {
-                    plugins: () => [require('autoprefixer')]
-                    }}, 'sass-loader']
-                    })
+        test: /\.woff2?$/,
+        use: {
+          loader: 'file-loader',
+          options: {
+            prefix: 'font/'
+          }
+        }
+      },
+      
+
+      {
+        test: /\.scss$/,
+
+        loader: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: [
+            'css-loader',
+             { 
+              loader: 'postcss-loader',
+              options: { 
+                plugins: () => [require('autoprefixer')]
+                 } 
+            },
+            {
+              loader: 'sass-loader',
+              options: {
+                includePaths: [ path.join('./src/sass') ]
+              }
+            }
+          ]
+        })
       }    
             
     ] 
@@ -86,12 +117,11 @@ context: __dirname, //path.resolve(__dirname, './src/js'),
 
     modules: [
       "node_modules",
-      path.resolve(__dirname, "app")
+      path.resolve(__dirname, "node_modules")
     ],
     // directories where to look for modules
 
-    extensions: [".js", ".json", ".jsx", ".css", ".scss"],
-    // extensions that are used
+    extensions: ['.js', '.json', '.jsx', '.css', '.scss']    // extensions that are used
 
   },
 
@@ -107,12 +137,12 @@ context: __dirname, //path.resolve(__dirname, './src/js'),
                 exclude: /node_modules/,
               ie8: false,
               ecma: 8,
-              parse: {...options},
+             // parse: {...options},
               mangle: true,
               output: {
                 comments: false,
-                beautify: false,
-                ...options
+                beautify: false
+                //...options
               },
               compress: true,
               warnings: false
@@ -121,10 +151,10 @@ context: __dirname, //path.resolve(__dirname, './src/js'),
           
         new CopyWebpackPlugin([{
               from: './src/fonts',
-              to: './build/fonts'
+              to: './fonts'
         }, {
               from: './src/images',
-              to: './build/images'
+              to: './images'
         }
         ]),
         
