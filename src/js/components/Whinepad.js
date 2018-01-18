@@ -308,7 +308,7 @@ _download(format, ev) { //имя метода требует уточнения 
                </Button>  
 
               <div className = "Divwrap">
-                <FormControl type="text" placeholder="Search...BS3" pullRight/>
+                <FormControl type="text" placeholder="Search...BS3" />
               </div>
 
              </ButtonToolbar>

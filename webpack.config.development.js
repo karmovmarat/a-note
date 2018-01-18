@@ -1,6 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+// const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const autoprefixer = require('autoprefixer');
  // для девелопмент: const merge = require('webpack-merge'); 
@@ -12,7 +12,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 module.exports = {
   context: __dirname, //path.resolve(__dirname, './src/js'),
   entry: {
-       zzapp: './src/js/app.js', // string | object | array
+       zapp: './src/js/app.js', // string | object | array
        vendor: [
         'react',
         'react-dom',
@@ -28,7 +28,7 @@ module.exports = {
     path: path.resolve(__dirname, 'build'), // string  '/build' -? это путь куда складывается сборка
     // the target directory for all output files
     // must be an absolute path (use the Node.js path module)
-    filename: '[name].bandle.js', // for multiple entry points e.x. 'zzapp.bandle.js'
+    filename: '[name].bandle.js', // for multiple entry points e.x. 'zapp.bandle.js'
     // the filename template for entry chunks
     sourceMapFilename: 'bandle.map', // string
     publicPath: './' // string это путь для формирования <script src="./zzapp.bandle.js"> </script>
@@ -83,24 +83,26 @@ module.exports = {
         ]
       },
       {
-        test: /\.woff2?$/,
+        test: /\.(ttf|eot|svg|woff2?)$/,
         use: {
           loader: 'file-loader',
           options: {
-            prefix: 'font/'
+             name: '[name].[ext]',
+             // publicPath: './images/',
+              outputPath: 'fonts/bootstrap/' //этот путь добавится к имени файла, а затем к пути output: { publicPath
+              // будет так  ./fonts/bootstrap/[name].[ext]
           }
         }
       },
-     {
+      {
         test: /\.scss$/,
-        loader: ExtractTextPlugin.extract({
-          fallback: {
+          use: [
+            {
               loader: 'style-loader',
               options: {
                 sourceMap: true
               }
             },
-          use: [
             { 
               loader: 'css-loader', options: { sourceMap: true }
             },
@@ -119,8 +121,8 @@ module.exports = {
               }
             }
           ]
-        })
-       }      
+        
+       } 
             
     ]  
 
@@ -142,12 +144,12 @@ module.exports = {
 
   devServer: {
     
-    contentBase:  './build', // boolean | string | array, static file location = path.join(__dirname),
+    contentBase: './src',//'./build', // boolean | string | array, static file location = path.join(__dirname),
     open: true,
     publicPath: "/", // это путь от корня сайта для index.html
     compress: true, // enable gzip compression
     historyApiFallback: true, // true for index.html upon 404, object for multiple paths
-    //hot: true, // hot module replacement. Depends on HotModuleReplacementPlugin
+    hot: true, // hot module replacement. Depends on HotModuleReplacementPlugin
     https: false, // true for self-signed, object for cert authority
     noInfo: true, // only errors & warns on hot reload
     // ...
@@ -161,7 +163,7 @@ module.exports = {
         new webpack.NamedModulesPlugin(),
         
         
-        new ExtractTextPlugin('zapp.css'),
+       // new ExtractTextPlugin('zapp.css'),
 
        // для девелопмент:   new UglifyJsPlugin({        }),
           

@@ -61,7 +61,7 @@ context: __dirname, //path.resolve(__dirname, './src/js'),
         // options for the loader
       },
       {
-        test: /\.(png|jpg|gif|svg)$/,
+        test: /\.(png|jpg|gif)$/,
         use: [
           {
             loader: 'file-loader',
@@ -75,11 +75,14 @@ context: __dirname, //path.resolve(__dirname, './src/js'),
         ]
       },
       {
-        test: /\.woff2?$/,
+        test: /\.(ttf|eot|svg|woff2?)$/,
         use: {
           loader: 'file-loader',
-          options: {
-            prefix: 'font/'
+           options: {
+             name: '[name].[ext]',
+             // publicPath: './images/',
+              outputPath: 'fonts/bootstrap/' //этот путь добавится к имени файла, а затем к пути output: { publicPath
+              // будет так  ./fonts/bootstrap/[name].[ext]
           }
         }
       },
@@ -89,12 +92,13 @@ context: __dirname, //path.resolve(__dirname, './src/js'),
         test: /\.scss$/,
 
         loader: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
+        //  fallback: 'style-loader', использовать желательно только на develomment
           use: [
             'css-loader',
-             { 
+            { 
               loader: 'postcss-loader',
               options: { 
+                sourceMap: true,
                 plugins: () => [require('autoprefixer')]
                  } 
             },
@@ -129,7 +133,7 @@ context: __dirname, //path.resolve(__dirname, './src/js'),
 
    plugins: [
         // для продакшн:  new webpack.DefinePlugin({'process.env': { NODE_ENV: JSON.stringify("production")} }),
-        
+        new webpack.optimize.ModuleConcatenationPlugin(),
         new ExtractTextPlugin('app.css'),
 
         new UglifyJsPlugin({

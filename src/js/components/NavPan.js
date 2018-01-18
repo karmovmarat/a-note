@@ -16,7 +16,6 @@ class NavPan extends Component {
 
     constructor(props) {
         super(props);
-
     }
 
     render() {
@@ -29,7 +28,7 @@ class NavPan extends Component {
             <
             Navbar.Brand >
             <
-            a href = "#" > БЛОКНОТ-BS3-28 < /a> <
+            a href = "#" > БЛОКНОТ-BS3-v006 < /a> <
             /Navbar.Brand> <
             Navbar.Toggle / >
             <
@@ -64,5 +63,4 @@ class NavPan extends Component {
     }
 
 }
-
 export default NavPan
