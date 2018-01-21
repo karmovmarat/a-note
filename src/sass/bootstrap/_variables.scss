@@ -151,6 +151,10 @@ $table-border-color:            #ddd !default;
 
 $btn-font-weight:                normal !default;
 
+$btn-defaultcustom-color:              #333 !default; //цвет фона кнопки при наведении (:hover background-color)
+$btn-defaultcustom-bg:                 #f3eeee !default; //цвет фона кнопки (background-color)
+$btn-defaultcustom-border:             #ccc !default; //цвет линий кнопки (background-color)
+
 $btn-default-color:              #333 !default;
 $btn-default-bg:                 #fff !default;
 $btn-default-border:             #ccc !default;

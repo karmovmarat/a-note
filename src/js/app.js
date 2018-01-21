@@ -21,7 +21,7 @@ if (!data) {
 ReactDOM.render(
   <div >
     <div className="app-header">
-       <Logo/> 9357 БЛОКНОТ !
+       <Logo/> 20.01.2018 БЛОКНОТ !
     </div>
     <NavPan/>
    

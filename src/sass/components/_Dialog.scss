@@ -6,13 +6,21 @@
   overflow: hidden; /* no body scroll */
 }
 
-.Dialog .DialogHeader {
+.Dialog .DialogHeader  {
   background-color: #6F001B;
   color: #F0F0F0;
   font-family: Norican, cursive;
   font-size: 42px;
   margin: 0;
   padding: 10px 10px 10px 20px;
+  text-align: left;
+}
+
+.DialogHeader {
+  background-color: #F2C0CC;
+  font-size: 18px;
+  font-family: Norican, cursive;
+ 
   text-align: left;
 }
 

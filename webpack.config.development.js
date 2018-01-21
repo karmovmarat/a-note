@@ -185,6 +185,4 @@ module.exports = {
         })
     ]
   // list of additional plugins
-
-
 }

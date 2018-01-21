@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/lib/Button';
 //import ButtonGroup from 'react-bootstrap/lib/ButtonGroup';
 import ButtonToolbar from 'react-bootstrap/lib/ButtonToolbar';
 import FormControl from 'react-bootstrap/lib/FormControl';
-
+/*
 import Popover from 'react-bootstrap/lib/Popover';
 import Tooltip from 'react-bootstrap/lib/Tooltip';
 import Modal from 'react-bootstrap/lib/Modal';
@@ -11,12 +11,14 @@ import ModalHeader from 'react-bootstrap/lib/ModalHeader';
 import ModalTitle from 'react-bootstrap/lib/ModalTitle';
 import ModalBody from 'react-bootstrap/lib/ModalBody';
 import OverlayTrigger from 'react-bootstrap/lib/OverlayTrigger';
-import ModalFooter from 'react-bootstrap/lib/ModalFooter';
+import ModalFooter from 'react-bootstrap/lib/ModalFooter';   
+*/
 
 /*import from react */ 
 //import Button from './Button'; 
 // import NavPanBs4 from './NavPanBs4'; // удаляем
 
+import DialogBs from './DialogBs';
 import Dialog from './Dialog';
 import Excel from './Excel';
 import Form from './Form';
@@ -25,45 +27,46 @@ import React, {Component, PropTypes} from 'react';
 class Whinepad extends Component {
 
   constructor(props) {
-    super(props);
-    this.state = {
-      data: props.initialData,
-      addnew: false,
-      addnewBs3: false,
-      showModal: false, //for react-bootstrap BS3
-      schema: props.initialSchema,
-      titlenote: props.initialSchema[0].titlenote,
-      expanded: true,
-      collapseOnSelect: true,
-    };
-    this._preSearchData = null;
+      super(props);
+      this.state = {
+          data: props.initialData,
+          addnew: false,
+          addnewBs3: false,
+          showModal: false, //for react-bootstrap BS3
+          schema: props.initialSchema,
+          titlenote: props.initialSchema[0].titlenote,
+          expanded: true,
+          collapseOnSelect: true,
+      };
+      this._preSearchData = null;
   }
   
-  _addNewDialog() {
-    this.setState({addnew: true});
+  _addNewDialog() { //this metod for open modal
+    this.setState({addnew: true}); 
   }
 
   _addNewDialogBs3() {
     this.setState({addnewBs3: true});
   }
 
-  _close() {
-    this.setState({ showModal: false });
+  _close() { //this metod for react-bootstrap close modal
+    this.setState({ showModal: false }); 
   }
 
-  _open() {
-    this.setState({ showModal: true });
+  _open() { //this metod for react-bootstrap open modal
+    this.setState({ showModal: true }); 
   }
   
-  _addNew(action) {
+  _addNew(action) { //this metod for close modal with or without savede data
     if (action === 'dismiss') {
-      this.setState({addnew: false});
+      this.setState({addnew: false, showModal: false});
       return;
     }
     let data = Array.from(this.state.data);
     data.unshift(this.refs.form.getData());
     this.setState({
       addnew: false,
+      showModal: false,
       data: data,
     });
     this._commitToStorage(data);
@@ -172,14 +175,14 @@ _download(format, ev) { //имя метода требует уточнения 
   }
 
   _getSchemaNote(note) {
-  	var shcm = note[0];
-  	if (Array.isArray(shcm)) {
-  		alert("это массив===");
-  	} else {
-  		alert("это чтото немассив ===");
-  	};
-  	return shcm;
-  }
+     var shcm = note[0];
+     if (Array.isArray(shcm)) {
+         alert("это массив===");
+     } else {
+         alert("это чтото немассив ===");
+     };
+     return shcm;
+ }
 
   _getDataNote(note) {
   	var data = note.slice(1);
@@ -207,44 +210,29 @@ _download(format, ev) { //имя метода требует уточнения 
   }
 
   _search(e) {
-    const needle = e.target.value.toLowerCase();
-    if (!needle) {
-      this.setState({data: this._preSearchData});
-      return;
-    }
-    const fields = this.state.schema.map(item => item.id);
-    const searchdata = this._preSearchData.filter(row => {
-      for (let f = 0; f < fields.length; f++) {
-        if (row[fields[f]].toString().toLowerCase().indexOf(needle) > -1) {
-          return true;
-        }
+      const needle = e.target.value.toLowerCase();
+      if (!needle) {
+          this.setState({ data: this._preSearchData });
+          return;
       }
-      return false;
-    });
-    this.setState({data: searchdata});
+      const fields = this.state.schema.map(item => item.id);
+      const searchdata = this._preSearchData.filter(row => {
+          for (let f = 0; f < fields.length; f++) {
+              if (row[fields[f]].toString().toLowerCase().indexOf(needle) > -1) {
+                  return true;
+              }
+          }
+          return false;
+      });
+      this.setState({ data: searchdata });
   }
 
   //Change the handleClick function:
-
   _handleClick(e) {     
     this.typeFileInput.click();
   }
   
   render() {
-
-     const popover = (
-      <Popover id="modal-popover" title="popover">
-        very popover. such engagement
-      </Popover>
-    );
-    const tooltip = (
-      <Tooltip id="modal-tooltip">
-        wowSS.
-      </Tooltip>
-    );
-
-
-
     return (
       <div className="Whinepad" >
        
@@ -257,26 +245,22 @@ _download(format, ev) { //имя метода требует уточнения 
          {this.state.titlenote} 
         </div>
 
-        <div className="WhinepadToolbar"  >
+        <div className="WhinepadToolbar" >
 
             <ButtonToolbar className="clearfix">
             <Button 
               onClick={this._addNewDialog.bind(this)}
               className="WhinepadToolbarAddButton"
               bsStyle="success">
-
               + add
             </Button>
           
-
-           
-             <Button 
+       
+            <Button 
                onClick={this._onNoteExport.bind(this, 'json')}
                ref="WhinepadToolbarExportButton1" 
                href="data.json"
-               bsStyle="primary"
-                
-               >
+               bsStyle="primary" >
                to Export JSON
             </Button>
       
@@ -286,15 +270,13 @@ _download(format, ev) { //имя метода требует уточнения 
               ref={(input) => { this.typeFileInput = input; }}
               accept="application/json"
               style={{display: "none"}} 
-              onChange={this._downloadFrom.bind(this)}
-              /> 
+              onChange={this._downloadFrom.bind(this)}  /> 
 
               <Button 
                 onClick={this._handleClick.bind(this)}
                 ref="WhinepadToolbarExportButton2"
                 no_href="#"
-                bsStyle="warning"
-                >
+                bsStyle="warning" >
                 Import Note
               </Button>
 
@@ -303,7 +285,6 @@ _download(format, ev) { //имя метода требует уточнения 
                  // className="WhinepadToolbarAddButton"
                  bsStyle="success"
                  onClick={this._open.bind(this)}>
-
                  + add_BS3
                </Button>  
 
@@ -312,16 +293,14 @@ _download(format, ev) { //имя метода требует уточнения 
               </div>
 
              </ButtonToolbar>
-            
                
-           
 
             <div className="WhinepadToolbarSearch">
-             <input 
+              <input 
                 placeholder="Search..." 
                 onChange={this._search.bind(this)}
                 onFocus={this._startSearching.bind(this)}
-               onBlur={this._doneSearching.bind(this)}/>
+               onBlur={this._doneSearching.bind(this)}    />
             </div>
 
         </div>
@@ -334,52 +313,25 @@ _download(format, ev) { //имя метода требует уточнения 
             onDataChange={this._onExcelDataChange.bind(this)} />
         </div>
 
-
-        {  this.state.showModal 
-    ? <Modal show={this.state.showModal} onHide={this._close.bind(this)} backdrop="static" >
-          <Modal.Header closeButton>
-                      <Modal.Title> Add new item. Modal heading</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <h4>Text in a modal</h4>
-            <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula.</p>
-
-            <h4>Popover in a modal</h4>
-              <p>there is a <OverlayTrigger overlay={popover}>
-                   <a href="#">popover</a>
-                        </OverlayTrigger> here</p>
-
-              <h4>Tooltips in a modal</h4>
-                   <p>there is a <OverlayTrigger overlay={tooltip}>
-                         <a href="#">tooltip</a></OverlayTrigger> here</p>
-
-            <hr />
-
-            <Form
-             ref = "form"
-             fields = { this.state.schema }
-            /> 
-
-            <h4>Overflowing text to show scroll behavior</h4>
-            <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
-            <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
-            <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
-           
-          </Modal.Body>
-          <Modal.Footer>
-                     <Button onClick={this._close.bind(this)}>Close</Button>
-          </Modal.Footer>
-        </Modal> 
-
-    : null
-}
-
-
-
+        {this.state.showModal
+          ? <DialogBs 
+              showModal={true}
+              modal={true}
+              header="Add new item. "
+              confirmLabel="Add-Bs"
+              onAction={this._addNew.bind(this)}
+              onClos={this._close.bind(this)}
+            >
+              <Form
+                ref="form"
+                fields={this.state.schema} />
+            </DialogBs>
+          : null}
+ 
         {this.state.addnew
           ? <Dialog 
               modal={true}
-              header="Add new item"
+              header="Add new item. "
               confirmLabel="Add"
               onAction={this._addNew.bind(this)}
             >

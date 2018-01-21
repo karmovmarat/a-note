@@ -43,14 +43,14 @@ class Form extends Component {
 }
 
 Form.propTypes = {
-  fields: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    label: PropTypes.string.isRequired,
-    type: PropTypes.string,
-    options: PropTypes.arrayOf(PropTypes.string),
+       fields: PropTypes.arrayOf(PropTypes.shape({
+           id: PropTypes.string.isRequired,
+        label: PropTypes.string.isRequired,
+         type: PropTypes.string,
+      options: PropTypes.arrayOf(PropTypes.string),
   })).isRequired,
   initialData: PropTypes.object,
-  readonly: PropTypes.bool,
+     readonly: PropTypes.bool,
 };
 
 export default Form
