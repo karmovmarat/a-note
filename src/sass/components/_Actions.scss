@@ -20,10 +20,19 @@
 
 .Actions .ActionsInfo {
   border-color: #3498DB;
-  color: #3498DB;
+ // color: #3498DB;
 }
 
 .Actions .ActionsDelete {
   border-color: #B7477D;
-  color: #B7477D;
+ // color: #B7477D;
+}
+
+.Actions .btn-toolbar {
+  min-width: 200px;
+  color: #000000;
+}
+
+.Actions button {
+  color: #000000;
 }

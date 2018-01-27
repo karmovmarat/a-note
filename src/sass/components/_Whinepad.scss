@@ -15,7 +15,7 @@
 }
 
 .Whinepad .WhinepadToolbarAddButton {
-  font-size: 16px;  
+  font-size: 14px;  
 }
             
 .Whinepad .WhinepadToolbarExportButton {
@@ -50,6 +50,16 @@
   padding-top: 20px;
 }
 
+.ModalSizeCustom input, textarea {
+  width: 90%;
+}
 
+.ModalSizeCustom .modal-dialog {
+  margin: 0;
+}
 
+.InputSearchWidthSize {
+  max-width: 40%;
+  float: right;
+}
 

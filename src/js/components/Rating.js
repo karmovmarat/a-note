@@ -53,8 +53,8 @@ class Rating extends Component {
           'Rating': true,
           'RatingReadonly': this.props.readonly,
         })}
-        onMouseOut={this.reset.bind(this)}
-      >
+        onMouseOut={this.reset.bind(this)} >
+        
         {stars}
         {this.props.readonly || !this.props.id
           ? null 

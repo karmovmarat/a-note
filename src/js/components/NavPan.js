@@ -25,7 +25,10 @@ class NavPan extends Component {
             <Navbar inverse collapseOnSelect >
             <Navbar.Header>
             <Navbar.Brand>
-            <a href = "#" > БЛОКНОТ-BS3-v006 </a>
+            <a href = "#" >
+              <span className="glyphicon glyphicon-list-alt" aria-hidden="true">
+              </span>  &#x2606; БЛОКНОТ-BS3-v008 
+            </a>
             </Navbar.Brand> 
             <Navbar.Toggle/>
             </Navbar.Header> 
@@ -34,23 +37,24 @@ class NavPan extends Component {
             <Nav>
             
             <NavItem eventKey = { 1 } href = "#" > Новый файл. </NavItem> 
-            <NavItem eventKey = { 2 } href = "#" > Открыть файл. </NavItem> 
-            <NavDropdown eventKey = { 3 } title = "Dropdown"
-            id = "basic-nav-dropdown" >
+            <NavItem onClick = { this.props.onFileOpen } href = "#" > Открыть файл. </NavItem> 
+            <NavDropdown 
+              eventKey = { 3 } 
+              title = "Dropdown"
+              id = "basic-nav-dropdown" >
             
-            <MenuItem eventKey = { 3.1 } > Сохранить </MenuItem> 
+            <MenuItem onClick = { this.props.onFileSave } href="data.json"> Сохранить файл. </MenuItem> 
             <MenuItem eventKey = { 3.2 } > Another action </MenuItem> 
-            <MenuItem eventKey = { 3.3 } > Something
-            else here </MenuItem> 
-                <MenuItem divider / >
+            <MenuItem eventKey = { 3.3 } > Something else here </MenuItem> 
+                <MenuItem divider />
                 
                 <MenuItem eventKey = { 3.3 } > Separated link </MenuItem> 
                 </NavDropdown> 
                 </Nav> 
                 <Nav pullRight >
                 
-                <NavItem eventKey = { 1 } href = "#" > Сохранить файл. </NavItem>
-                <NavItem eventKey = { 2 } href = "#" > О программе. </NavItem> 
+                <NavItem onClick = { this.props.onFileSave } href="data.json" > Сохранить файл. </NavItem>
+                <NavItem onClick = { this.props.onAbout } href = "#" > О программе. </NavItem> 
                 </Nav> 
                 </Navbar.Collapse> 
                 </Navbar>
@@ -58,4 +62,10 @@ class NavPan extends Component {
         );
     }
 }
+NavPan.propTypes = {
+  onFileOpen: PropTypes.func,
+  onFileSave: PropTypes.func,
+  onAbout: PropTypes.func,
+};
+
 export default NavPan

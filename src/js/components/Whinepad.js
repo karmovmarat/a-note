@@ -17,21 +17,21 @@ import ModalFooter from 'react-bootstrap/lib/ModalFooter';
 /*import from react */ 
 //import Button from './Button'; 
 // import NavPanBs4 from './NavPanBs4'; // удаляем
-
+import NavPan from './NavPan';
 import DialogBs from './DialogBs';
-import Dialog from './Dialog';
+//import Dialog from './Dialog';
+import DialogBsAbout from './DialogBsAbout';
 import Excel from './Excel';
 import Form from './Form';
 import React, {Component, PropTypes} from 'react';
 
 class Whinepad extends Component {
-
   constructor(props) {
       super(props);
       this.state = {
           data: props.initialData,
           addnew: false,
-          addnewBs3: false,
+          showModalAbout: false,
           showModal: false, //for react-bootstrap BS3
           schema: props.initialSchema,
           titlenote: props.initialSchema[0].titlenote,
@@ -45,8 +45,12 @@ class Whinepad extends Component {
     this.setState({addnew: true}); 
   }
 
-  _addNewDialogBs3() {
-    this.setState({addnewBs3: true});
+  _openModalAbout() {
+    this.setState({showModalAbout: true});
+  }
+
+  _closeModalAbout() { //this metod for react-bootstrap close modalAbout
+    this.setState({ showModalAbout: false }); 
   }
 
   _close() { //this metod for react-bootstrap close modal
@@ -72,7 +76,7 @@ class Whinepad extends Component {
     this._commitToStorage(data);
   }
 
-_download(format, ev) { //имя метода требует уточнения (щас используем _onNoteExport)
+  _download(format, ev) { //имя метода требует уточнения (щас используем _onNoteExport)
     var contents = format === 'json'
       ? JSON.stringify(this.state.data)
       : this.state.data.reduce(function(result, row) {
@@ -182,7 +186,7 @@ _download(format, ev) { //имя метода требует уточнения 
          alert("это чтото немассив ===");
      };
      return shcm;
- }
+  }
 
   _getDataNote(note) {
   	var data = note.slice(1);
@@ -235,6 +239,11 @@ _download(format, ev) { //имя метода требует уточнения 
   render() {
     return (
       <div className="Whinepad" >
+        <NavPan
+          onFileOpen={this._handleClick.bind(this)}
+          onFileSave={this._onNoteExport.bind(this, 'json')} 
+          onAbout={this._openModalAbout.bind(this) }
+        />
        
         <div  style={ 
       	 {border: "solid",
@@ -246,14 +255,14 @@ _download(format, ev) { //имя метода требует уточнения 
         </div>
 
         <div className="WhinepadToolbar" >
-
             <ButtonToolbar className="clearfix">
             <Button 
-              onClick={this._addNewDialog.bind(this)}
-              className="WhinepadToolbarAddButton"
-              bsStyle="success">
-              + add
-            </Button>
+                //onClick={this._addNewDialogBs3.bind(this)}
+                // className="WhinepadToolbarAddButton"
+                bsStyle="success"
+                onClick={this._open.bind(this)}>
+                 + add_record
+            </Button>  
           
        
             <Button 
@@ -261,7 +270,7 @@ _download(format, ev) { //имя метода требует уточнения 
                ref="WhinepadToolbarExportButton1" 
                href="data.json"
                bsStyle="primary" >
-               to Export JSON
+               Сохранить файл
             </Button>
       
               <input 
@@ -275,34 +284,25 @@ _download(format, ev) { //имя метода требует уточнения 
               <Button 
                 onClick={this._handleClick.bind(this)}
                 ref="WhinepadToolbarExportButton2"
-                no_href="#"
+                //no_href="#"
                 bsStyle="warning" >
-                Import Note
+                Открыть файл
               </Button>
 
-               <Button 
-                 //onClick={this._addNewDialogBs3.bind(this)}
-                 // className="WhinepadToolbarAddButton"
-                 bsStyle="success"
-                 onClick={this._open.bind(this)}>
-                 + add_BS3
-               </Button>  
-
-              <div className = "Divwrap">
-                <FormControl type="text" placeholder="Search...BS3" />
+              
+              <div className="InputSearchWidthSize">
+                <div className = "Divwrap">
+                  <FormControl 
+                  type="text" 
+                  placeholder="Search...BS3"
+                  onChange={this._search.bind(this)}
+                  onFocus={this._startSearching.bind(this)}
+                  onBlur={this._doneSearching.bind(this)}  />
+                </div>
               </div>
 
              </ButtonToolbar>
                
-
-            <div className="WhinepadToolbarSearch">
-              <input 
-                placeholder="Search..." 
-                onChange={this._search.bind(this)}
-                onFocus={this._startSearching.bind(this)}
-               onBlur={this._doneSearching.bind(this)}    />
-            </div>
-
         </div>
 
 
@@ -315,13 +315,14 @@ _download(format, ev) { //имя метода требует уточнения 
 
         {this.state.showModal
           ? <DialogBs 
-              showModal={true}
+              classNameSize="ModalSizeCustom"
+              showModal={true}  //for react-bootstrap BS3
               modal={true}
               header="Add new item. "
               confirmLabel="Add-Bs"
               onAction={this._addNew.bind(this)}
-              onClos={this._close.bind(this)}
-            >
+              onClos={this._close.bind(this)} >
+
               <Form
                 ref="form"
                 fields={this.state.schema} />
@@ -329,7 +330,7 @@ _download(format, ev) { //имя метода требует уточнения 
           : null}
  
         {this.state.addnew
-          ? <Dialog 
+          ? <Dialog // old version, for winepad
               modal={true}
               header="Add new item. "
               confirmLabel="Add"
@@ -340,6 +341,25 @@ _download(format, ev) { //имя метода требует уточнения 
                 fields={this.state.schema} />
             </Dialog>
           : null}
+
+          {this.state.showModalAbout 
+          ? <DialogBsAbout 
+              classNameSize="ModalSizeCustom"
+              showModal={true}  //for react-bootstrap BS3  ModalAbout
+              modal={true}
+              header="About A-Note. "
+              confirmLabel="Ok."
+              hasCancel={false}
+              onAction={this._closeModalAbout.bind(this)}
+              onClos={this._closeModalAbout.bind(this)} >
+              <div>
+                <h4> A-Note  Version 0.0.8 </h4>
+                <h4> Special thanks Tregubov Alexey.</h4>
+                <h4> Code licensed MIT.</h4>
+              </div>
+            </DialogBsAbout>
+          : null}
+         
       </div>
     );
   }

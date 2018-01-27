@@ -19,7 +19,7 @@ import ModalBody from 'react-bootstrap/lib/ModalBody';
 import OverlayTrigger from 'react-bootstrap/lib/OverlayTrigger';
 import ModalFooter from 'react-bootstrap/lib/ModalFooter';
 
-class DialogBs extends Component {
+class DialogBsAbout extends Component {
 /*  
 componentWillUnmount() {
     document.body.classList.remove('DialogModalOpen');
@@ -49,33 +49,27 @@ componentWillUnmount() {
      <Modal 
      className={this.props.classNameSize} 
      show={this.props.showModal} 
-     onHide={this.props.onAction.bind(this, 'dismiss')} 
+     onHide={this.props.onAction } 
      backdrop="static" >
           <Modal.Header className="DialogHeader" closeButton>
-                      <Modal.Title> {this.props.header} </Modal.Title>
+            <Modal.Title> {this.props.header} </Modal.Title>
           </Modal.Header>
+
           <Modal.Body>
+             <hr/>
+             {this.props.children}
 
-            <h4>Text in a modal</h4>
-            <p>Duis mollis porttitor.</p>
-
-            <h4>Popover in a modal</h4>
-              <p>there is a <OverlayTrigger overlay={popover}>
-                   <a href="#">popover</a>
-                        </OverlayTrigger> here</p>
-
-              <h4>Tooltips in a modal</h4>
-                   <p>there is a <OverlayTrigger overlay={tooltip}>
-                         <a href="#">tooltip</a></OverlayTrigger> here</p>
-
-            <hr/>
-              <h4> {this.props.children} </h4>
-           
           </Modal.Body>
+
           <Modal.Footer>
+            <div className="ModalFooterCopyright"> Copyright © 2017–2018 Karmov Marat
+            <p>Los Angeles, California 2018</p>
+            </div>
+            <Button onClick={this.props.onClos }>Close</Button>
 
               {this.props.hasCancel
                 ?  <Button 
+                  bsStyle="defaultcustom"
                   className="DialogDismiss"
                   onClick={this.props.onAction.bind(this, 'dismiss')}>
                   Cancel-Bs
@@ -97,7 +91,7 @@ componentWillUnmount() {
 
 }
 
-DialogBs.propTypes = {
+DialogBsAbout.propTypes = {
   header: PropTypes.string.isRequired,
   confirmLabel: PropTypes.string,
   modal: PropTypes.bool,
@@ -109,7 +103,7 @@ DialogBs.propTypes = {
   classNameSize: PropTypes.string,
 };
 
-DialogBs.defaultProps = {
+DialogBsAbout.defaultProps = {
   confirmLabel: 'ok',
   modal: false,
   showModal: false,
@@ -120,4 +114,4 @@ DialogBs.defaultProps = {
   classNameSize: "",
 };
 
-export default DialogBs
+export default DialogBsAbout

@@ -1,4 +1,6 @@
+import ActionsBtn from './ActionsBtn';
 import Actions from './Actions';
+import DialogBs from './DialogBs';
 import Dialog from './Dialog';
 import Form from './Form';
 import FormInput from './FormInput';
@@ -131,32 +133,37 @@ class Excel extends Component {
     const first = this.state.data[this.state.dialog.idx];
     const nameguess = first[Object.keys(first)[0]];
     return (
-      <Dialog 
+      <DialogBs //Dialog
         modal={true}
-        header="Confirm deletion"
-        confirmLabel="Delete"
-        onAction={this._deleteConfirmationClick.bind(this)}
-      >
+        showModal={true}  //for react-bootstrap BS3
+        header="Confirm deletion. "
+        confirmLabel="Delete-Bs"
+        bsStyleConfirm="danger" //for react-bootstrap BS3
+        onAction={this._deleteConfirmationClick.bind(this)} >
+
         {`Are you sure you want to delete "${nameguess}"?`}
-      </Dialog>
+      </DialogBs>
     );
   }
   
   _renderFormDialog(readonly) {
     return (
-      <Dialog 
+      <DialogBs //Dialog
+        classNameSize="ModalSizeCustom"
         modal={true}
-        header={readonly ? 'Item info' : 'Edit item'}
+        showModal={true}  //for react-bootstrap BS3
+        header={readonly ? 'Item info. ' : 'Edit item. '}
         confirmLabel={readonly ? 'ok' : 'Save'}
+        bsStyleConfirm="primary" //for react-bootstrap BS3
         hasCancel={!readonly}
-        onAction={this._saveDataDialog.bind(this)}
-      >
+        onAction={this._saveDataDialog.bind(this)} >
+
         <Form
           ref="form"
           fields={this.state.initialSchema}
           initialData={this.state.data[this.state.dialog.idx]}
           readonly={readonly} />
-      </Dialog>
+      </DialogBs>
     ); 
   }
   
@@ -177,8 +184,7 @@ class Excel extends Component {
                 <th 
                   className={`schema-${item.id}`}
                   key={item.id}
-                  onClick={this._sort.bind(this, item.id)}
-                >
+                  onClick={this._sort.bind(this, item.id)} >
                   {title}
                 </th>
               );
@@ -219,13 +225,11 @@ class Excel extends Component {
                       })} 
                       key={idx}
                       data-row={rowidx}
-                      data-key={schema.id}>
-                      {content}
-                    </td>
+                      data-key={schema.id}  >{content}</td>
                   );
                 }, this)}
                 <td className="ExcelDataCenter">
-                  <Actions onAction={this._actionClick.bind(this, rowidx)}/>
+                  <ActionsBtn onAction={this._actionClick.bind(this, rowidx)}/> 
                 </td>
               </tr>
             );
