@@ -46,8 +46,8 @@
 
 .Whinepad .WhinepadDatagrid {
   clear: both;
-  margin: 40px;
-  padding-top: 20px;
+  margin: 20px;
+  padding-top: 2px;
 }
 
 .ModalSizeCustom input, textarea {
@@ -61,5 +61,6 @@
 .InputSearchWidthSize {
   max-width: 40%;
   float: right;
+  margin-top: 10px;
 }
 

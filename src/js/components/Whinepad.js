@@ -263,8 +263,7 @@ class Whinepad extends Component {
                 onClick={this._open.bind(this)}>
                  + add_record
             </Button>  
-          
-       
+           
             <Button 
                onClick={this._onNoteExport.bind(this, 'json')}
                ref="WhinepadToolbarExportButton1" 
@@ -285,11 +284,12 @@ class Whinepad extends Component {
                 onClick={this._handleClick.bind(this)}
                 ref="WhinepadToolbarExportButton2"
                 //no_href="#"
-                bsStyle="warning" >
+                bsStyle="primary" 
+                bsClass="btn"
+                >
                 Открыть файл
               </Button>
-
-              
+  
               <div className="InputSearchWidthSize">
                 <div className = "Divwrap">
                   <FormControl 
@@ -301,10 +301,8 @@ class Whinepad extends Component {
                 </div>
               </div>
 
-             </ButtonToolbar>
-               
+             </ButtonToolbar>      
         </div>
-
 
         <div className="WhinepadDatagrid">
           <Excel 
@@ -353,7 +351,7 @@ class Whinepad extends Component {
               onAction={this._closeModalAbout.bind(this)}
               onClos={this._closeModalAbout.bind(this)} >
               <div>
-                <h4> A-Note  Version 0.0.8 </h4>
+                <h4> A-Note  Version 0.0.81 </h4>
                 <h4> Special thanks Tregubov Alexey.</h4>
                 <h4> Code licensed MIT.</h4>
               </div>

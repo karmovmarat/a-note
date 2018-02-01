@@ -27,7 +27,7 @@ class NavPan extends Component {
             <Navbar.Brand>
             <a href = "#" >
               <span className="glyphicon glyphicon-list-alt" aria-hidden="true">
-              </span>  &#x2606; БЛОКНОТ-BS3-v008 
+              </span>  &#x2606; БЛОКНОТ-BS3-v0081 
             </a>
             </Navbar.Brand> 
             <Navbar.Toggle/>

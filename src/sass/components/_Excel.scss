@@ -2,26 +2,40 @@
   overflow: auto;
 }
 
+.Excel table {
+  width: 100%;
+  border-color: #c2b6b6; //custom
+  border-style: solid;  //custom
+}
+
 .Excel input {
   font: 16px Arial;
 }
 
 .Excel td {
-  background-color: #ffffff;
+  //background-color: #ffffff;  //#e8e3e3
   padding: 5px;
+  color: #191515;  // color for font
+}
+
+.Excel table tr:nth-of-type(odd) {
+  //custom цвет фона для нечетных строк данных (тела) таблицы
+  background-color: #e8e3e3; 
+}
+
+.Excel table tr:nth-of-type(even) { 
+  //custom цвет фона для четных строк данных (тела) таблицы
+  background-color: #e9f6f3;  
 }
 
 .Excel th {
-  color: #7f7f7f;
+  background-color: #fbebd7;  //custom цвет фона для заголовка таблицы
+  color: #151515;   //  #7f7f7f;  custom
   cursor: pointer;
   font-size: 13px;
-  font-weight: normal;
+  font-weight: bold;  //normal;
   padding: 5px;
   text-align: center;
-}
-
-.Excel table {
-  width: 100%;
 }
 
 .Excel .ExcelNotSortable {
