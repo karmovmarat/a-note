@@ -1,7 +1,7 @@
 "use strict";
 
 import '../sass/styles.scss';
-import Logo from './components/Logo';
+//import Logo from './components/Logo';
 //import Footer from './components/Footer';
 import React from 'react';
 import ReactDOM from 'react-dom';

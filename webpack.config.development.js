@@ -1,4 +1,4 @@
-const path = require('path');
+const Path = require('path');
 const webpack = require('webpack');
 // const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
@@ -10,7 +10,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
-  context: __dirname, //path.resolve(__dirname, './src/js'),
+  context: __dirname, //Path.resolve(__dirname, './src/js'),
   entry: {
        zapp: './src/js/app.js', // string | object | array
        vendor: [
@@ -25,7 +25,7 @@ module.exports = {
 
   output: {
     // options related to how webpack emits results
-    path: path.resolve(__dirname, 'build'), // string  '/build' -? это путь куда складывается сборка
+    path: Path.resolve(__dirname, 'build'), // string  '/build' -? это путь куда складывается сборка
     // the target directory for all output files
     // must be an absolute path (use the Node.js path module)
     filename: '[name].bandle.js', // for multiple entry points e.x. 'zapp.bandle.js'
@@ -44,7 +44,7 @@ module.exports = {
       // rules for modules (configure loaders, parser options, etc.)
       {
          test: /\.jsx?$/,
-         exclude: [ path.resolve(__dirname, 'node_modules') ],   // exclude: /node_modules/
+         exclude: [ Path.resolve(__dirname, 'node_modules') ],   // exclude: /node_modules/
 
         // these are matching conditions, each accepting a regular expression or string
         // test and include have the same behavior, both must be matched
@@ -116,7 +116,7 @@ module.exports = {
             {
               loader: 'sass-loader',
               options: {
-                includePaths: [ path.join('./src/sass') ],
+                includePaths: [ Path.join('./src/sass') ],
                 sourceMap: true
               }
             }
@@ -134,7 +134,7 @@ module.exports = {
 
     modules: [
       "node_modules",
-      path.resolve(__dirname, "node_modules")
+      Path.resolve(__dirname, "node_modules")
     ],
     // directories where to look for modules
 
@@ -144,7 +144,7 @@ module.exports = {
 
   devServer: {
     
-    contentBase: './src',//'./build', // boolean | string | array, static file location = path.join(__dirname),
+    contentBase: './src',//'./build', // boolean | string | array, static file location = Path.join(__dirname),
     open: true,
     publicPath: "/", // это путь от корня сайта для index.html
     compress: true, // enable gzip compression

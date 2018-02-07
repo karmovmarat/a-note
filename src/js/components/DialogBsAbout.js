@@ -63,7 +63,7 @@ componentWillUnmount() {
 
           <Modal.Footer>
             <div className="ModalFooterCopyright"> Copyright © 2017–2018 Karmov Marat
-            <p>Los Angeles, California 2018</p>
+            <p>Los Angeles, California. 2018</p>
             </div>
             <Button onClick={this.props.onClos }>Close</Button>
 

@@ -26,8 +26,8 @@ class NavPan extends Component {
             <Navbar.Header>
             <Navbar.Brand>
             <a href = "#" >
-              <span className="glyphicon glyphicon-list-alt" aria-hidden="true">
-              </span>  &#x2606; БЛОКНОТ-BS3-v0081 
+              <i className="fa fa-book fa-lg" aria-hidden="true">
+              </i> &nbsp; &#x2606; БЛОКНОТ-BS3-v0082 
             </a>
             </Navbar.Brand> 
             <Navbar.Toggle/>
@@ -37,13 +37,17 @@ class NavPan extends Component {
             <Nav>
             
             <NavItem eventKey = { 1 } href = "#" > Новый файл. </NavItem> 
-            <NavItem onClick = { this.props.onFileOpen } href = "#" > Открыть файл. </NavItem> 
+            <NavItem onClick = { this.props.onFileOpen } href = "#" > 
+            <span className="fa fa-folder-open-o fa-lg " aria-hidden="true"></span>&nbsp; 
+             Открыть файл. </NavItem> 
             <NavDropdown 
               eventKey = { 3 } 
               title = "Dropdown"
               id = "basic-nav-dropdown" >
             
-            <MenuItem onClick = { this.props.onFileSave } href="data.json"> Сохранить файл. </MenuItem> 
+            <MenuItem onClick = { this.props.onFileSave } href="data.json">
+            <i className="fa fa-floppy-o" aria-hidden="true"> </i> &nbsp;
+             Сохранить файл. </MenuItem> 
             <MenuItem eventKey = { 3.2 } > Another action </MenuItem> 
             <MenuItem eventKey = { 3.3 } > Something else here </MenuItem> 
                 <MenuItem divider />
@@ -53,8 +57,12 @@ class NavPan extends Component {
                 </Nav> 
                 <Nav pullRight >
                 
-                <NavItem onClick = { this.props.onFileSave } href="data.json" > Сохранить файл. </NavItem>
-                <NavItem onClick = { this.props.onAbout } href = "#" > О программе. </NavItem> 
+                <NavItem onClick = { this.props.onFileSave } href="data.json" >
+                <i className="fa fa-floppy-o fa-lg" aria-hidden="true"> </i> &nbsp;
+                 Сохранить файл. </NavItem>
+                <NavItem onClick = { this.props.onAbout } href = "#"> 
+                <i className="fa fa-info-circle fa-lg" aria-hidden="true"> </i> &nbsp;
+                  О программе. </NavItem> 
                 </Nav> 
                 </Navbar.Collapse> 
                 </Navbar>

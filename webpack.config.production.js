@@ -1,5 +1,5 @@
 const webpack = require("webpack");
-const path = require('path');
+const Path = require('path');
  // для продакшн: const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
@@ -25,7 +25,7 @@ context: __dirname, //path.resolve(__dirname, './src/js'),
 
   output: {
     // options related to how webpack emits results
-    path: path.resolve(__dirname, 'build'), // string  '/build' -?
+    path: Path.resolve(__dirname, 'build'), // string  '/build' -?
     // the target directory for all output files
     // must be an absolute path (use the Node.js path module)
     filename: '[name].bandle.js', // for multiple entry points e.x. 'app.bandle.js'
@@ -44,7 +44,7 @@ context: __dirname, //path.resolve(__dirname, './src/js'),
       // rules for modules (configure loaders, parser options, etc.)
       {
          test: /\.jsx?$/,
-      exclude: [ path.resolve(__dirname, 'node_modules') ],   // exclude: /node_modules/
+      exclude: [ Path.resolve(__dirname, 'node_modules') ],   // exclude: /node_modules/
 
         // these are matching conditions, each accepting a regular expression or string
         // test and include have the same behavior, both must be matched
@@ -81,7 +81,7 @@ context: __dirname, //path.resolve(__dirname, './src/js'),
            options: {
              name: '[name].[ext]',
              // publicPath: './images/',
-              outputPath: 'fonts/bootstrap/' //этот путь добавится к имени файла, а затем к пути output: { publicPath
+              outputPath: 'fonts/awesome/' //этот путь добавится к имени файла, а затем к пути output: { publicPath
               // будет так  ./fonts/bootstrap/[name].[ext]
           }
         }
@@ -105,7 +105,7 @@ context: __dirname, //path.resolve(__dirname, './src/js'),
             {
               loader: 'sass-loader',
               options: {
-                includePaths: [ path.join('./src/sass') ]
+                includePaths: [ Path.join('./src/sass') ]
               }
             }
           ]
@@ -121,7 +121,7 @@ context: __dirname, //path.resolve(__dirname, './src/js'),
 
     modules: [
       "node_modules",
-      path.resolve(__dirname, "node_modules")
+      Path.resolve(__dirname, "node_modules")
     ],
     // directories where to look for modules
 
@@ -155,7 +155,7 @@ context: __dirname, //path.resolve(__dirname, './src/js'),
           
         new CopyWebpackPlugin([{
               from: './src/fonts',
-              to: './fonts'
+              to: './fonts3'
         }, {
               from: './src/images',
               to: './images'

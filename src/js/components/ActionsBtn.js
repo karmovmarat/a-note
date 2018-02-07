@@ -25,7 +25,9 @@ const ActionsBtn = props =>
       tabIndex="0"
       className="ActionsDelete"
       title="Delete"
-      onClick={props.onAction.bind(null, 'delete')}>x Del</Button>
+      onClick={props.onAction.bind(null, 'delete')}>
+      <i className="fa fa-trash-o " aria-hidden="true"> </i> &nbsp;
+      Delete</Button>
   </ButtonToolbar>
   </div>
 

@@ -11,7 +11,23 @@
 // Reset and dependencies
 @import "bootstrap/normalize";
 @import "bootstrap/print";
-@import "bootstrap/glyphicons";
+// @import "bootstrap/glyphicons";
+//@import "awesome/font-awesome";
+
+
+@import "awesome/variables";
+@import "awesome/mixins";
+@import "awesome/path";
+@import "awesome/core";
+@import "awesome/larger";
+@import "awesome/fixed-width";
+@import "awesome/list";
+@import "awesome/bordered-pulled";
+@import "awesome/animated";
+@import "awesome/rotated-flipped";
+@import "awesome/stacked";
+@import "awesome/icons";
+@import "awesome/screen-reader";
 
 // Core CSS
 @import "bootstrap/scaffolding";
