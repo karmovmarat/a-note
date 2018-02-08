@@ -26,8 +26,8 @@ class NavPan extends Component {
             <Navbar.Header>
             <Navbar.Brand>
             <a href = "#" >
-              <i className="fa fa-book fa-lg" aria-hidden="true">
-              </i> &nbsp; &#x2606; БЛОКНОТ-BS3-v0082 
+              <i className="fa fa-book fa-lg" aria-hidden="true"> </i>  
+              &#x2606; БЛОКНОТ-v0083 
             </a>
             </Navbar.Brand> 
             <Navbar.Toggle/>

@@ -3,7 +3,7 @@
   border: 2px solid black;
   color: black;
   cursor: pointer;
-  display: inline-block;
+  //display: inline-block;  older items
   font-weight: bold;
   height: 40px;
   margin: 5px 15px 5px 15px;
@@ -12,6 +12,7 @@
   transition-duration: 0.1s;
   transition-property: transform;
   width: 40px;
+  display: none; // added for hiden items with class "sr-only"
 }
 
 .Actions span:hover {

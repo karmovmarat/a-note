@@ -11,23 +11,32 @@ const ActionsBtn = props =>
       tabIndex="0"
       className="ActionsInfo"
       title="More info"
-      onClick={props.onAction.bind(null, 'info')}> &#8505; Info </Button>
+      onClick={props.onAction.bind(null, 'info')}> 
+      <i className="fa fa-info-circle fa-3x" aria-hidden="true"> </i>  
+      <span class="sr-only">More info...</span>
+    </Button>
+
     <Button 
       bsStyle="warning"
       bsSize="small"
       tabIndex="0" 
       className="ActionsEdit" 
       title="Edit"
-      onClick={props.onAction.bind(null, 'edit')}>&#10000; Edit</Button>
+      onClick={props.onAction.bind(null, 'edit')}>
+      <i className="fa fa-pencil-square-o fa-3x" aria-hidden="true">  </i> 
+      <span class="sr-only">Edit.</span>
+       </Button>
+
     <Button 
       bsStyle="danger"
       bsSize="small"
       tabIndex="0"
-      className="ActionsDelete"
+      className="sActionsDelete"
       title="Delete"
       onClick={props.onAction.bind(null, 'delete')}>
-      <i className="fa fa-trash-o " aria-hidden="true"> </i> &nbsp;
-      Delete</Button>
+      <i className="fa fa-trash-o fa-3x" aria-hidden="true"> </i> 
+      <span class="sr-only">Delete.</span>
+     </Button>
   </ButtonToolbar>
   </div>
 

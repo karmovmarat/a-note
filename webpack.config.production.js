@@ -154,8 +154,8 @@ context: __dirname, //path.resolve(__dirname, './src/js'),
         }),
           
         new CopyWebpackPlugin([{
-              from: './src/fonts',
-              to: './fonts3'
+              from: './src/fonts/awesome_light',
+              to: './fonts/awesome'
         }, {
               from: './src/images',
               to: './images'

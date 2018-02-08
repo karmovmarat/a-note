@@ -345,13 +345,13 @@ class Whinepad extends Component {
               classNameSize="ModalSizeCustom"
               showModal={true}  //for react-bootstrap BS3  ModalAbout
               modal={true}
-              header="About A-Note. "
+              header="About &nbsp; A-Note. "
               confirmLabel="Ok."
               hasCancel={false}
               onAction={this._closeModalAbout.bind(this)}
               onClos={this._closeModalAbout.bind(this)} >
               <div>
-                <h4> A-Note  Version 0.0.81 </h4>
+                <h4> A-Note  Version 0.0.83 </h4>
                 <h4> Special thanks Tregubov Alexey.</h4>
                 <h4> Code licensed MIT.</h4>
               </div>
