@@ -1,23 +1,12 @@
 "use strict";
 
 import '../sass/styles.scss';
-//import Logo from './components/Logo';
-//import Footer from './components/Footer';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Whinepad from './components/Whinepad';
 import ListNoteTemplate from './listnotetemplate';
 import schema from './1schema';
-//import NavPan from './components/NavPan';
 
-let data = null;// JSON.parse(localStorage.getItem('data'));
-
-// default example data, read from the schema
-if (!data) {
-  data = {};
-  schema.forEach((item) => data[item.id] = item.sample);
-  data = [data];
-}
 // создаем список блокнотов для создания кнопок выбора
 var listBtnNote = ListNoteTemplate.map((Arr, idx) => ({
      id: idx.toString(),
