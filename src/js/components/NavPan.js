@@ -27,7 +27,7 @@ class NavPan extends Component {
             <Navbar.Brand>
             <a href = "#" >
               <i className="fa fa-book fa-lg" aria-hidden="true"> </i>  
-              &#x2606; БЛОКНОТ-v0083 
+              &#x2606; БЛОКНОТ-v0084 
             </a>
             </Navbar.Brand> 
             <Navbar.Toggle/>
@@ -44,8 +44,7 @@ class NavPan extends Component {
               eventKey = { 3 } 
               title = "Dropdown"
               id = "basic-nav-dropdown" >
-            
-            <MenuItem onClick = { this.props.onFileSave } href="data.json">
+            <MenuItem onClick = { this.props.onFileSave } href="data.json" >
             <i className="fa fa-floppy-o" aria-hidden="true"> </i> &nbsp;
              Сохранить файл. </MenuItem> 
             <MenuItem eventKey = { 3.2 } > Another action </MenuItem> 
@@ -59,7 +58,7 @@ class NavPan extends Component {
                 
                 <NavItem onClick = { this.props.onFileSave } href="data.json" >
                 <i className="fa fa-floppy-o fa-lg" aria-hidden="true"> </i> &nbsp;
-                 Сохранить файл. </NavItem>
+                 Сохранить файл.</NavItem>
                 <NavItem onClick = { this.props.onAbout } href = "#"> 
                 <i className="fa fa-info-circle fa-lg" aria-hidden="true"> </i> &nbsp;
                   О программе. </NavItem> 

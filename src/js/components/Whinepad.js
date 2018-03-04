@@ -3,20 +3,11 @@ import Button from 'react-bootstrap/lib/Button';
 //import ButtonGroup from 'react-bootstrap/lib/ButtonGroup';
 import ButtonToolbar from 'react-bootstrap/lib/ButtonToolbar';
 import FormControl from 'react-bootstrap/lib/FormControl';
-/*
-import Popover from 'react-bootstrap/lib/Popover';
-import Tooltip from 'react-bootstrap/lib/Tooltip';
-import Modal from 'react-bootstrap/lib/Modal';
-import ModalHeader from 'react-bootstrap/lib/ModalHeader';
-import ModalTitle from 'react-bootstrap/lib/ModalTitle';
-import ModalBody from 'react-bootstrap/lib/ModalBody';
-import OverlayTrigger from 'react-bootstrap/lib/OverlayTrigger';
-import ModalFooter from 'react-bootstrap/lib/ModalFooter';   
-*/
 
 /*import from react */ 
 //import Button from './Button'; 
 // import NavPanBs4 from './NavPanBs4'; // удаляем
+import ChooseBtn from './ChooseBtn';
 import NavPan from './NavPan';
 import DialogBs from './DialogBs';
 //import Dialog from './Dialog';
@@ -29,28 +20,52 @@ class Whinepad extends Component {
   constructor(props) {
       super(props);
       this.state = {
-          data: props.initialData,
+          listnotetemplate: props.initialListnotetemplate,
+          listBtnNote: props.initialListBtnNote,
+          data: null, // props.initialData,
+          schema: null,  // props.initialSchema,
+          titlenote: null,  // props.initialSchema[0].titlenote,
           addnew: false,
           showModalAbout: false,
+          showModalChoose: false,
           showModal: false, //for react-bootstrap BS3
-          schema: props.initialSchema,
-          titlenote: props.initialSchema[0].titlenote,
           expanded: true,
           collapseOnSelect: true,
+          choosenote: true,  // true: Btn choose new template note OR choose saved note
+                             // false: worke with current Note
+          //  choosetype: null, // {type: action}
       };
       this._preSearchData = null;
+      this._handleClick = this._handleClick.bind(this);
+      this._getNewNoteDataSchema = this._getNewNoteDataSchema.bind(this);
   }
   
   _addNewDialog() { //this metod for open modal
     this.setState({addnew: true}); 
+  }
+  _closeNote() {
+    this.setState({
+    data: null,
+    schema: null,
+    titlenote: null,
+    choosenote: true,
+    showModalChoose: false, }); 
   }
 
   _openModalAbout() {
     this.setState({showModalAbout: true});
   }
 
+  _openModalChoose() {
+    this.setState({showModalChoose: true});
+  }
+
   _closeModalAbout() { //this metod for react-bootstrap close modalAbout
     this.setState({ showModalAbout: false }); 
+  }
+
+  _closeModalChoose() { //this metod for react-bootstrap close modalAbout
+    this.setState({ showModalChoose: false }); 
   }
 
   _close() { //this metod for react-bootstrap close modal
@@ -63,7 +78,11 @@ class Whinepad extends Component {
   
   _addNew(action) { //this metod for close modal with or without savede data
     if (action === 'dismiss') {
-      this.setState({addnew: false, showModal: false});
+      this.setState({
+        addnew: false, 
+        showModal: false,
+        showModalChoose: false,
+      });
       return;
     }
     let data = Array.from(this.state.data);
@@ -98,7 +117,7 @@ class Whinepad extends Component {
   }
 
   _downloadFrom(e) {
-	// получаем из элемента события объект FileList, это массив
+  // получаем из элемента события объект FileList, это массив
     var files = e.target.files, //массив элементов (файлов) из FileList
         file = files[0], // первый объект file из из массива files (из FileList'a)
         fileNameLocal = file.name, //узнаем имя файла в локальной системе
@@ -124,7 +143,7 @@ class Whinepad extends Component {
       //проверяем является ли dataTypeJson массивом
       if (!Array.isArray(dataTypeJson)) 
       { //Array.isArray(dataTypeJson)
-      	alert("choose again file, что пошло не так, выберите файл еще раз ! ");
+        alert("choose again file, что пошло не так, выберите файл еще раз ! ");
       }  
       //*****************alert("парсинг var dataTypeJson " + dataTypeJson);
       //здесь парсим полученный файл "JSON" на Дату и Схему
@@ -134,42 +153,43 @@ class Whinepad extends Component {
       let data = this._getDataNote(dataTypeJson);
       let titlenote = schema[0].titlenote;
       this.setState({
-    	schema: schema,
-    	data: data,
-    	titlenote: titlenote,   //обязательное поле (в будущем)
+      schema: schema,
+      data: data,
+      titlenote: titlenote,   //обязательное поле (в будущем)
+      choosenote: false,
         });
       this._commitToStorage(data);
       //END процедуры "fr.onload"
      }  
-    } else {	
+    } else {  
        alert("choose another file, выберите другой тип файла, !");
        return;
-    }
+    };
   }
 
   _onNoteExport(format, ev) {
-  	let note = Array.from(this.state.data);
-  	if (!Array.isArray(this.state.schema)) { //проверяем формат схемы
-  		//если не массив, то отменяем Экспорт!
-  		alert("не могу сделать ЭКСПОРТ. неверный формат Блокнота ===");
-  		ev.preventDefault();
-  		return;
-  	} 
-  	let nameFileExport = prompt("задайте имя Блокнота", "" + this.state.titlenote);
-  	//проверить nameFileExport на null
-  	if (nameFileExport != null) {
-  		//выставляем новый заголовок Блокнота в Схеме
-  		const schemaForExport = this.state.schema.map(item => {
-  			item.titlenote = nameFileExport;
-  			return item;
-  		});
-  		this.setState({
-  			schema: schemaForExport,
-  			titlenote: nameFileExport,
-  		});
-  	}
-  	//// ???????????????????????? titlenote in schema
-  	note.unshift(this.state.schema);
+    let note = Array.from(this.state.data);
+    if (!Array.isArray(this.state.schema)) { //проверяем формат схемы
+      //если не массив, то отменяем Экспорт!
+      alert("не могу сделать ЭКСПОРТ. неверный формат Блокнота ===");
+      ev.preventDefault();
+      return;
+    } 
+    let nameFileExport = prompt("задайте имя Блокнота", "" + this.state.titlenote);
+    //проверить nameFileExport на null
+    if (nameFileExport != null) {
+      //выставляем новый заголовок Блокнота в Схеме
+      const schemaForExport = this.state.schema.map(item => {
+        item.titlenote = nameFileExport;
+        return item;
+      });
+      this.setState({
+        schema: schemaForExport,
+        titlenote: nameFileExport,
+      });
+    }
+    //// ???????????????????????? titlenote in schema
+    note.unshift(this.state.schema);
     var contents = JSON.stringify(note),
         URL = window.URL || window.webkitURL,
         blob = new Blob([contents], {type: 'text/' + format});
@@ -183,18 +203,18 @@ class Whinepad extends Component {
      if (Array.isArray(shcm)) {
          alert("это массив===");
      } else {
-         alert("это чтото немассив ===");
+         alert("это что-то немассив ===");
      };
      return shcm;
   }
 
   _getDataNote(note) {
-  	var data = note.slice(1);
-  	return data;
+    var data = note.slice(1);
+    return data;
   }
 
   _onExcelDataChange(data) {
-  	alert("грузим!!")
+    alert("грузим!!")
     this.setState({data: data});
     this._commitToStorage(data);
   }
@@ -231,44 +251,86 @@ class Whinepad extends Component {
       this.setState({ data: searchdata });
   }
 
+  _getNewNoteDataSchema(e) {
+    let idx = e.target.id;
+  let data = {}; // JSON.parse(localStorage.getItem('data'));
+  let schema = this.state.listnotetemplate[idx];
+  let titlenote = schema[0].titlenote;
+  schema.forEach((item) => data[item.id] = item.sample);
+  data = [data];
+  alert("100500");
+  this.setState({
+    data: data,
+    schema: schema,
+    titlenote: titlenote,
+    choosenote: false,
+
+  }); 
+}
+
   //Change the handleClick function:
   _handleClick(e) {     
     this.typeFileInput.click();
   }
-  
+
+  _renderChooseDialog() {
+    if (this.state.choosenote && this.state.showModalChoose) {
+    return (
+      <DialogBs 
+        classNameSize="ModalSizeCustom"
+        showModal={true}  //for react-bootstrap BS3
+        modal={true}
+        header="Choose template for New Note. "
+        confirmLabel="Choose-Add-Bs"
+        onAction={this._addNew.bind(this)}
+        onClos={this._closeModalChoose.bind(this)} >
+
+        <Form
+          getNewNote={this._getNewNoteDataSchema}
+          ref="form"
+          fields={this.state.listBtnNote}
+          choose={true} />
+      </DialogBs>
+    );}
+    return null;
+  }
+
   render() {
     return (
       <div className="Whinepad" >
+
         <NavPan
-          onFileOpen={this._handleClick.bind(this)}
+          onFileOpen={this._handleClick} // метод привяязан к this в конструкторе
           onFileSave={this._onNoteExport.bind(this, 'json')} 
-          onAbout={this._openModalAbout.bind(this) }
-        />
+          onAbout={this._openModalAbout.bind(this) } />
        
         <div  style={ 
-      	 {border: "solid",
-      	 borderColor: "#a21146",
-      	 margin: "auto",
-      	 textAlign: "center"}
-      	 } >
+         {border: "solid",
+         borderColor: "#a21146",
+         margin: "auto",
+         textAlign: "center"} } >
          {this.state.titlenote} 
         </div>
 
         <div className="WhinepadToolbar" >
             <ButtonToolbar className="clearfix">
             <Button 
+                title="Add new record to Note"
                 //onClick={this._addNewDialogBs3.bind(this)}
                 // className="WhinepadToolbarAddButton"
                 bsStyle="success"
-                onClick={this._open.bind(this)}>
+                onClick={this._open.bind(this)}
+                disabled={this.state.choosenote} >
                  + add_record
             </Button>  
            
-            <Button 
+            <Button
+               title="Save to file Note" 
                onClick={this._onNoteExport.bind(this, 'json')}
                ref="WhinepadToolbarExportButton1" 
                href="data.json"
-               bsStyle="primary" >
+               bsStyle="primary"
+               disabled={this.state.choosenote}  >
                Сохранить файл
             </Button>
       
@@ -281,13 +343,24 @@ class Whinepad extends Component {
               onChange={this._downloadFrom.bind(this)}  /> 
 
               <Button 
-                onClick={this._handleClick.bind(this)}
+                title="Open Saved Note"
+                onClick={this._handleClick} // метод привязан к this в конструкторе
                 ref="WhinepadToolbarExportButton2"
                 //no_href="#"
                 bsStyle="primary" 
-                bsClass="btn"
-                >
+                bsClass="btn" >
                 Открыть файл
+              </Button>
+
+              <Button 
+                title="Close Note"
+                onClick={this._closeNote.bind(this)} 
+                ref="NotepadToolbarCloseButton"
+                //no_href="#"
+                bsStyle="danger" 
+                bsClass="btn"
+                disabled={this.state.choosenote} >
+                Закрыть блокнот
               </Button>
   
               <div className="InputSearchWidthSize">
@@ -304,12 +377,19 @@ class Whinepad extends Component {
              </ButtonToolbar>      
         </div>
 
-        <div className="WhinepadDatagrid">
-          <Excel 
-            initialSchema={this.state.schema}
-            initialData={this.state.data}
-            onDataChange={this._onExcelDataChange.bind(this)} />
-        </div>
+         {this.state.choosenote 
+           ?  <ChooseBtn 
+                onOpenModalChoose={this._openModalChoose.bind(this)} 
+                onOpenSavedNote={this._handleClick} />
+
+           :  <div className = "WhinepadDatagrid">
+                <Excel
+                  initialSchema = { this.state.schema }
+                  initialData = { this.state.data }
+                  onDataChange = { this._onExcelDataChange.bind(this) } /> 
+              </div>
+          }
+        {this._renderChooseDialog()}
 
         {this.state.showModal
           ? <DialogBs 
@@ -346,12 +426,12 @@ class Whinepad extends Component {
               showModal={true}  //for react-bootstrap BS3  ModalAbout
               modal={true}
               header="About &nbsp; A-Note. "
-              confirmLabel="Ok."
+              confirmLabel="Close"
               hasCancel={false}
               onAction={this._closeModalAbout.bind(this)}
               onClos={this._closeModalAbout.bind(this)} >
               <div>
-                <h4> A-Note  Version 0.0.83 </h4>
+                <h4> A-Note  Version 0.0.84 </h4>
                 <h4> Special thanks Tregubov Alexey.</h4>
                 <h4> Code licensed MIT.</h4>
               </div>
@@ -368,6 +448,12 @@ Whinepad.propTypes = {
     PropTypes.object
   ),
   initialData: PropTypes.arrayOf(
+    PropTypes.object
+  ),
+  initialListnotetemplate: PropTypes.arrayOf(
+    PropTypes.array
+  ),
+  initialListBtnNote: PropTypes.arrayOf(
     PropTypes.object
   ),
 };

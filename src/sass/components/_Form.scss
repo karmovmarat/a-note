@@ -1,5 +1,5 @@
 .Form .FormLabel {
-  color: #A0A0A0;
+  color: #210D11;  
   display: block;
   font-size: 12px;
   padding: 12px 0 6px;
@@ -8,4 +8,21 @@
 .Form .FormRow {
   padding-left: 20px;
   text-align: left;
+}
+
+.Form .FormRowChoose {
+  text-align: left;
+  border: #F2C0CC;
+  border-style: solid;
+  padding-left: 20px;
+  padding-bottom: 5px;
+  border-radius: 10px;
+  margin-bottom: 5px;
+}
+
+.Form .FormLabelChoose {
+  color: #201818;
+  display: block;
+  font-size: 12px;
+  padding: 12px 0 6px;
 }

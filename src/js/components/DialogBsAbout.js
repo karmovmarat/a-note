@@ -3,12 +3,6 @@ import React, {Component, PropTypes} from 'react';
 
 /*import from react-bootstrap */
 import Button from 'react-bootstrap/lib/Button';
-//import ButtonGroup from 'react-bootstrap/lib/ButtonGroup';
-
-/*
-import ButtonToolbar from 'react-bootstrap/lib/ButtonToolbar';
-import FormControl from 'react-bootstrap/lib/FormControl'; 
-*/
 
 import Popover from 'react-bootstrap/lib/Popover';
 import Tooltip from 'react-bootstrap/lib/Tooltip';
@@ -31,8 +25,6 @@ componentWillUnmount() {
     }
   }   
 */
-  
-
   render() {
         const popover = (
               <Popover id="modal-popover" title="popover">
@@ -64,9 +56,8 @@ componentWillUnmount() {
           <Modal.Footer>
             <div className="ModalFooterCopyright"> Copyright © 2017–2018 Karmov Marat
             <p>Los Angeles, California. 2018</p>
+            <p>build: 2018.03.04.0084</p>
             </div>
-            <Button onClick={this.props.onClos }>Close</Button>
-
               {this.props.hasCancel
                 ?  <Button 
                   bsStyle="defaultcustom"

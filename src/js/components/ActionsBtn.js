@@ -24,7 +24,7 @@ const ActionsBtn = props =>
       title="Edit"
       onClick={props.onAction.bind(null, 'edit')}>
       <i className="fa fa-pencil-square-o fa-3x" aria-hidden="true">  </i> 
-      <span class="sr-only">Edit.</span>
+      <span className="sr-only">Edit.</span>
        </Button>
 
     <Button 
@@ -35,7 +35,7 @@ const ActionsBtn = props =>
       title="Delete"
       onClick={props.onAction.bind(null, 'delete')}>
       <i className="fa fa-trash-o fa-3x" aria-hidden="true"> </i> 
-      <span class="sr-only">Delete.</span>
+      <span className="sr-only">Delete.</span>
      </Button>
   </ButtonToolbar>
   </div>

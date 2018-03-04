@@ -31,8 +31,6 @@ componentWillUnmount() {
     }
   }   
 */
-  
-
   render() {
         const popover = (
               <Popover id="modal-popover" title="popover">
