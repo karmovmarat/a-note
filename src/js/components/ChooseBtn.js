@@ -5,8 +5,9 @@ import ButtonToolbar from 'react-bootstrap/lib/ButtonToolbar';
 const ChooseBtn = props =>  
   <div className="DivChooseBtn">
   <ButtonToolbar >
-    <Button 
-      bsStyle="info"
+    <Button
+      block="true"
+      bsStyle="primary"
       bsSize="small"
       tabIndex="0"
       className="ChooseBtn"
@@ -18,7 +19,8 @@ const ChooseBtn = props =>
     </Button>
 
     <Button 
-      bsStyle="info"
+      block="true"
+      bsStyle="primary"
       bsSize="small"
       tabIndex="0" 
       className="ChooseBtn" 

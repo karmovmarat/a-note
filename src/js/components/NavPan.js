@@ -27,7 +27,7 @@ class NavPan extends Component {
             <Navbar.Brand>
             <a href = "#" >
               <i className="fa fa-book fa-lg" aria-hidden="true"> </i>  
-              &#x2606; БЛОКНОТ-v0084 
+              &#x2606; БЛОКНОТ-v0085 
             </a>
             </Navbar.Brand> 
             <Navbar.Toggle/>

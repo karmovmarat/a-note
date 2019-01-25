@@ -54,9 +54,9 @@ componentWillUnmount() {
           </Modal.Body>
 
           <Modal.Footer>
-            <div className="ModalFooterCopyright"> Copyright © 2017–2018 Karmov Marat
-            <p>Los Angeles, California. 2018</p>
-            <p>build: 2018.03.04.0084</p>
+            <div className="ModalFooterCopyright"> Copyright © 2017–2019 Karmov Marat
+            <p>Los Angeles, California. 2019</p>
+            <p>build: 2019.25.01.0085</p>
             </div>
               {this.props.hasCancel
                 ?  <Button 
