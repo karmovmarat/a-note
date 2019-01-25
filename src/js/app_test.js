@@ -36,7 +36,7 @@ ReactDOM.render(
 
    
     <div className="Appfooter">
-      <Footer/> Подвал ! !   04 November 2017 year
+      <Footer/> Подвал ! !   25 january 2019 year
     </div>
 
   </div>,
